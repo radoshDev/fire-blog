@@ -1,0 +1,17 @@
+$primary: #1d1d1d;
+$secondary: #1eb8b8;
+$accent: #9c27b0;
+
+$dark: #303030;
+$grey: #999999;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+@mixin mobile-min {
+  @media (min-width: $breakpoint-sm-min) {
+    @content;
+  }
+}

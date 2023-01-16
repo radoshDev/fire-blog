@@ -5,3 +5,10 @@ export type Post = {
   date: string
   id: number
 }
+
+export type BlogPost = {
+  htmlDescription: string
+  title: string
+  photo: File | null
+  photoPreviewUrl: string
+}

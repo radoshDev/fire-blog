@@ -17,7 +17,7 @@ function showImageGallery() {
 
 <template>
   <q-editor
-    v-model="postStore.blog.html"
+    v-model="postStore.blog.htmlDescription"
     ref="editor"
     placeholder="Write you blog body here..."
     class="post-editor"

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { Post } from '@/types/Post'
+import type { Post, BlogPost } from '@/types/Post'
 
 export const usePostsStore = defineStore('posts', () => {
   const postsCard = ref<Post[]>([
@@ -51,10 +51,10 @@ export const usePostsStore = defineStore('posts', () => {
     },
   ])
   const isEditPost = ref(false)
-  const blog = ref({
-    html: '',
+  const blog = ref<BlogPost>({
+    htmlDescription: '',
     title: '',
-    photo: null as File | null,
+    photo: null,
     photoPreviewUrl: '',
   })
   return { postsCard, blogPosts, isEditPost, blog }

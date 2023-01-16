@@ -9,7 +9,7 @@ const fileError = ref('')
 
 const onReject = handlerRejectFile(fileError)
 
-function onStart(file: File | null) {
+function onFileUpdate(file: File | null) {
   console.log('added file', file)
   if (file) {
     postStore.blog.photoPreviewUrl = URL.createObjectURL(file)
@@ -38,7 +38,7 @@ function onStart(file: File | null) {
       :error="fileError.length > 0"
       :error-message="fileError"
       @rejected="onReject"
-      @update:model-value="onStart"
+      @update:model-value="onFileUpdate"
     />
     <PreviewImage />
   </div>

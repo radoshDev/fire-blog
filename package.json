@@ -15,6 +15,7 @@
     "@quasar/extras": "^1.15.8",
     "@vee-validate/zod": "^4.7.3",
     "firebase": "^9.15.0",
+    "node-html-parser": "^6.1.4",
     "pinia": "^2.0.28",
     "quasar": "^2.11.1",
     "vee-validate": "^4.7.3",

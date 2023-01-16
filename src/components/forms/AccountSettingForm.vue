@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { doc, updateDoc } from 'firebase/firestore'
 import type { FormInput } from '@/types/Form'
-import { accountChangesValidationSchema } from '../../schemas/validationSchemasationSchemas'
-import type { AccountChangesValues } from '../../schemas/validationSchemasationSchemas'
 import { useForm, useField } from 'vee-validate'
 import { useUserStore } from '@/stores/userStore'
 import { useQuasar } from 'quasar'
 import db from '@/firebase/firebaseInit'
 import { ref } from 'vue'
+import {
+  accountChangesValidationSchema,
+  type AccountChangesValues,
+} from '@/schemas/validationSchemas'
 
 const $q = useQuasar()
 

@@ -2,13 +2,13 @@
 import { useForm, useField } from 'vee-validate'
 import { httpsCallable } from 'firebase/functions'
 import type { MessageResponse } from '@/types'
-import {
-  adminValidationScheme,
-  type AdminFormValues,
-} from '../../schemas/validationSchemasationSchemas'
 import { functions } from '@/firebase/firebaseInit'
 import type { FirebaseError } from '@firebase/util'
 import { useQuasar } from 'quasar'
+import {
+  adminValidationScheme,
+  type AdminFormValues,
+} from '@/schemas/validationSchemas'
 
 const { handleSubmit } = useForm<AdminFormValues>({
   validationSchema: adminValidationScheme,

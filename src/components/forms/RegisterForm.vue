@@ -9,14 +9,16 @@ import { useQuasar } from 'quasar'
 import db from '@/firebase/firebaseInit'
 import { doc, setDoc } from 'firebase/firestore'
 import { useForm, useField } from 'vee-validate'
-import { registerValidationScheme } from '../../schemas/validationSchemasationSchemas'
-import type { RegisterFormValues } from '../../schemas/validationSchemasationSchemas'
 import type { FormInput } from '@/types/Form'
 import TextField from './fields/TextField.vue'
 import { RouteName } from '@/router/routes'
 import { ref } from 'vue'
 import { getErrorMessage } from '@/firebase/getErrorMessage'
 import type { ErrCode } from '@/types'
+import {
+  registerValidationScheme,
+  type RegisterFormValues,
+} from '@/schemas/validationSchemas'
 
 const router = useRouter()
 const $q = useQuasar()

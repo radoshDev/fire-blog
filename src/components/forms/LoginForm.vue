@@ -6,13 +6,15 @@ import { useRouter } from 'vue-router'
 import type { ErrCode } from '@/types'
 import { auth } from '@/firebase/firebaseInit'
 import { getErrorMessage } from '@/firebase/getErrorMessage'
-import type { LoginFormValues } from '../../schemas/validationSchemasationSchemas'
 import type { FormInput } from '@/types/Form'
 import { RouteName } from '@/router/routes'
 import { useForm, useField } from 'vee-validate'
-import { loginValidationScheme } from '../../schemas/validationSchemasationSchemas'
 import TextField from './fields/TextField.vue'
 import { ref } from 'vue'
+import {
+  loginValidationScheme,
+  type LoginFormValues,
+} from '@/schemas/validationSchemas'
 
 const $q = useQuasar()
 const router = useRouter()

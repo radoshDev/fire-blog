@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { sendPasswordResetEmail, type AuthError } from 'firebase/auth'
 import { useQuasar } from 'quasar'
-import type { ResetPwdFormValues } from '../../schemas/validationSchemasationSchemas'
 import type { FormInput } from '@/types/Form'
 import { useForm, useField } from 'vee-validate'
-import { resetPwdValidationScheme } from '../../schemas/validationSchemasationSchemas'
 import TextField from './fields/TextField.vue'
 import { ref } from 'vue'
 import ModalBasic from '../ui/ModalBasic.vue'
 import { auth } from '@/firebase/firebaseInit'
 import type { ErrCode } from '@/types'
 import { getErrorMessage } from '@/firebase/getErrorMessage'
+import {
+  resetPwdValidationScheme,
+  type ResetPwdFormValues,
+} from '@/schemas/validationSchemas'
 
 const showModal = ref(false)
 const isLoading = ref(false)

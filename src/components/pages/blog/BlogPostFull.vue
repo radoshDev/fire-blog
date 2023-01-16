@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import type { BlogPost } from '@/types/Post'
-import { parse } from 'node-html-parser'
+import { computed } from 'vue'
+import { getSanitizedHtml } from '@/utils/getSanitizedHtml'
 
-defineProps<BlogPost>()
+import type { BlogPost } from '@/types/Post'
+
+const props = defineProps<{ post: BlogPost }>()
+
+const htmlDescription = computed(() =>
+  getSanitizedHtml(props.post.htmlDescription)
+)
 </script>
 
 <template>
   <div class="blog-post">
-    <h1>{{ title }}</h1>
+    <h1>{{ post.title }}</h1>
     <div class="description">
-      {{ parse(htmlDescription) }}
+      <div v-html="htmlDescription"></div>
     </div>
   </div>
 </template>

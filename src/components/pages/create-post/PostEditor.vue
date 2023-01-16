@@ -72,5 +72,10 @@ function showImageGallery() {
   img {
     width: initial;
   }
+  ul,
+  li {
+    list-style: initial;
+    margin-left: 2rem;
+  }
 }
 </style>

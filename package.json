@@ -12,10 +12,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@braintree/sanitize-url": "^6.0.2",
     "@quasar/extras": "^1.15.8",
     "@vee-validate/zod": "^4.7.3",
     "firebase": "^9.15.0",
-    "node-html-parser": "^6.1.4",
     "pinia": "^2.0.28",
     "quasar": "^2.11.1",
     "vee-validate": "^4.7.3",

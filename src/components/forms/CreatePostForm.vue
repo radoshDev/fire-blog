@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { usePostsStore } from '@/stores/postStore'
 import ImageBlock from '../pages/create-post/ImageBlock.vue'
 import PostEditor from '../pages/create-post/PostEditor.vue'
+import { RouteName } from '@/router/routes'
 
 const postStore = usePostsStore()
 const isPostFilled = computed(
@@ -29,7 +30,11 @@ const isPostFilled = computed(
         type="submit"
         :disable="!isPostFilled"
       />
-      <q-btn label="Post Preview" rounded />
+      <q-btn
+        label="Post Preview"
+        rounded
+        :to="{ name: RouteName.PREVIEW_POST }"
+      />
     </div>
   </q-form>
 </template>

@@ -5,6 +5,7 @@ import { getFunctions } from 'firebase/functions'
 import { getStorage } from 'firebase/storage'
 import type { DocumentData, CollectionReference } from 'firebase/firestore'
 import type { User } from '@/types/User'
+import type { Post } from '@/types/Post'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -27,6 +28,7 @@ const getCollection = <T = DocumentData>(collectionName: string) => {
 
 export const db = {
   users: getCollection<User>('users'),
+  blogPosts: getCollection<Post>('blogPosts'),
 }
 
 export const functions = getFunctions(firebaseApp)

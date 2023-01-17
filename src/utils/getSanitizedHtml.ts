@@ -15,5 +15,5 @@ export const getSanitizedHtml = (html: string): string => {
     scriptEl.remove()
   }
 
-  return htmlDoc.documentElement.innerHTML
+  return htmlDoc.body.innerHTML
 }

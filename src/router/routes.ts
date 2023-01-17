@@ -4,6 +4,7 @@ const HomeView = () => import('@/views/HomeView.vue')
 const BlogsView = () => import('@/views/BlogsView.vue')
 const CreatePostView = () => import('@/views/CreatePostView.vue')
 const PreviewPostView = () => import('@/views/PreviewPostView.vue')
+const BlogPostView = () => import('@/views/BlogPostView.vue')
 const ProfileView = () => import('@/views/ProfileView.vue')
 const AdminView = () => import('@/views/AdminView.vue')
 const LoginView = () => import('@/views/auth/LoginView.vue')
@@ -16,6 +17,7 @@ export const RouteName = {
   BLOGS: 'blogs',
   CREATE_POST: 'create-post',
   PREVIEW_POST: 'preview-post',
+  VIEW_POST: 'view-post',
   LOGIN: 'login',
   REGISTER: 'register',
   FORGOT_PASSWORD: 'forgot-password',
@@ -59,6 +61,18 @@ const routes: RouteRecord[] = [
     path: '/preview-post',
     name: 'preview-post',
     component: PreviewPostView,
+    meta: {
+      title: 'Preview Post',
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/post/:id',
+    name: 'view-post',
+    component: BlogPostView,
+    beforeEnter: (event) => {
+      event.meta.title = 'New post' + event.params['id']
+    },
     meta: {
       title: 'Preview Post',
       requiresAuth: true,

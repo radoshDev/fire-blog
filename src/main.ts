@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { Quasar, Notify } from 'quasar'
+import { Quasar, Notify, Loading } from 'quasar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/firebase/firebaseInit'
 
@@ -16,7 +16,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(Quasar, {
-  plugins: { Notify },
+  plugins: { Notify, Loading },
 })
 
 onAuthStateChanged(auth, () => {

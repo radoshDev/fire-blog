@@ -1,9 +1,12 @@
+import type { Profile } from './User'
+
 export type Post = {
   title: string
-  textContent: string
+  descriptionHtml: string
   coverPhoto: string
   date: string
-  id: number
+  profileId: Profile['id']
+  id: string
 }
 
 export type BlogPost = {

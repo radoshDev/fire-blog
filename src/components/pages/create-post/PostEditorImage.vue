@@ -6,6 +6,7 @@ import { storage } from '@/firebase/firebaseInit'
 import { imageUrlValidationField } from '@/schemas/validationSchemas'
 import { handlerRejectFile } from '@/utils/handlerRejectFile'
 import { useField } from 'vee-validate'
+import { FireStoragePath } from '@/utils/constants'
 
 const props = defineProps<{ editor: QEditor | undefined }>()
 const emit = defineEmits(['closeModal'])
@@ -43,7 +44,10 @@ async function handleInsertImage() {
     if (imageFile.value) {
       isImageUploading.value = true
 
-      const storageRef = fRef(storage, `blogsPhotos/${imageFile.value.name}`)
+      const storageRef = fRef(
+        storage,
+        `${FireStoragePath.BLOG_BODY_IMAGES}/${imageFile.value.name}`
+      )
       const response = await uploadBytes(storageRef, imageFile.value)
       const imageUrl = await getDownloadURL(response.ref)
       props.editor.runCmd('insertHTML', `<img src="${imageUrl}"/>`)
@@ -105,6 +109,7 @@ async function handleInsertImage() {
       :src="imageUrl || imageSrc.value.value"
       @error="onImagePreviewError"
       class="q-mb-md"
+      height="250px"
       fit="contain"
     />
     <q-btn

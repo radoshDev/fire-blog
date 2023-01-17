@@ -60,3 +60,15 @@ img {
 .q-dialog__backdrop {
   backdrop-filter: blur(3px);
 }
+
+.reset-styles {
+  img {
+    width: initial;
+  }
+  ul,
+  ol,
+  li {
+    list-style: initial;
+    margin-left: 2rem;
+  }
+}

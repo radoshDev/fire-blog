@@ -11,6 +11,7 @@ const editor = ref<QEditor>()
 const isImage = ref(false)
 
 function showImageGallery() {
+  if (!editor.value) return
   isImage.value = true
 }
 </script>

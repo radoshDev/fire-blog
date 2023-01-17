@@ -12,12 +12,24 @@ const htmlDescription = computed(() =>
 </script>
 
 <template>
-  <div class="blog-post">
-    <h1>{{ post.title }}</h1>
-    <div class="description">
+  <div class="blog-post-full q-my-lg">
+    <h1 class="text-h2 text-bold q-mb-lg">{{ post.title }}</h1>
+    <q-img
+      v-if="post.photoPreviewUrl"
+      :src="post.photoPreviewUrl"
+      height="400px"
+      class="main-img"
+    >
+      <template v-slot:error>
+        <div class="absolute-full flex flex-center bg-negative text-white">
+          Cannot load image
+        </div>
+      </template>
+    </q-img>
+    <div class="description reset-styles">
       <div v-html="htmlDescription"></div>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss"></style>

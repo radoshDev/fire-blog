@@ -28,7 +28,7 @@ const getCollection = <T = DocumentData>(collectionName: string) => {
 
 export const db = {
   users: getCollection<User>('users'),
-  blogPosts: getCollection<Post>('blogPosts'),
+  blogPosts: getCollection<Omit<Post, 'id'>>('blogPosts'),
 }
 
 export const functions = getFunctions(firebaseApp)

@@ -55,7 +55,6 @@ async function uploadPost() {
     const blogDoc = doc(db.blogPosts)
     const descriptionHtml = getSanitizedHtml(postStore.blog.htmlDescription)
     await setDoc(blogDoc, {
-      id: blogDoc.id,
       coverPhoto: imageUrl,
       date: Timestamp.now(),
       descriptionHtml,

@@ -1,10 +1,11 @@
 import type { Profile } from './User'
+import { Timestamp } from 'firebase/firestore'
 
 export type Post = {
   title: string
   descriptionHtml: string
   coverPhoto: string
-  date: string
+  date: Timestamp
   profileId: Profile['id']
   id: string
 }

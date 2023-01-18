@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouteName } from '@/router/routes'
 import { useUserStore } from '@/stores/userStore'
 import type { Post } from '@/types/Post'
 
@@ -10,13 +11,16 @@ const userStore = useUserStore()
 <template>
   <div class="post" :class="{ 'no-user': !userStore.isAuth }">
     <div class="post-content">
-      <h2 class="title">{{ post.title }}</h2>
+      <h2 class="q-mb-lg">{{ post.title }}</h2>
+      <q-btn
+        label="View The Post"
+        icon-right="arrow_forward"
+        flat
+        :to="{ name: RouteName.VIEW_POST, params: { id: post.id } }"
+      />
     </div>
     <div class="post-picture">
-      <img
-        :src="`/src/assets/blogPhotos/${post.coverPhoto}.jpg`"
-        :alt="post.title"
-      />
+      <q-img :src="post.coverPhoto" :alt="post.title" height="400px" />
     </div>
   </div>
 </template>
@@ -47,16 +51,12 @@ const userStore = useUserStore()
   }
 
   .post-content {
-    flex: 2;
+    flex: 3;
     padding: 2rem;
-    .title,
-    .post-text {
-      max-width: 400px;
-      margin: 1.5rem auto;
-    }
+    text-align: center;
   }
   .post-picture {
-    flex: 3;
+    flex: 4;
     display: flex;
   }
 }

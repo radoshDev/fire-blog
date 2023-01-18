@@ -9,3 +9,9 @@ export type WithOptional<T, K extends keyof T> = CustomOmit<T, K> &
   Partial<Pick<T, K>>
 
 export type MessageResponse = { message: string }
+
+export type QueryData<T> = {
+  data: T
+  isLoading: boolean
+  error: string
+}

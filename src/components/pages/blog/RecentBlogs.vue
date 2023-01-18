@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { usePostsStore } from '@/stores/postStore'
+import { computed } from 'vue'
 import BlogCardsList from './BlogCardsList.vue'
-const store = usePostsStore()
+const postStore = usePostsStore()
+const posts = computed(() => postStore.posts.data.slice(2, 6))
 </script>
 
 <template>
   <div class="cards-wrapper">
     <div class="container">
       <h3 class="title">View more recent blogs</h3>
-      <BlogCardsList :post-list="store.recentPosts" />
+      <BlogCardsList :post-list="posts" />
     </div>
   </div>
 </template>

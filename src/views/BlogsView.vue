@@ -19,7 +19,7 @@ onUnmounted(() => {
           <span>Toggle Edit Posts</span>
           <q-toggle v-model="postStore.isEditPost" />
         </div>
-        <BlogCardsList :post-list="postStore.posts" />
+        <BlogCardsList :post-list="postStore.posts.data" />
       </div>
     </div>
   </LayoutPage>

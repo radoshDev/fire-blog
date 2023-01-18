@@ -19,7 +19,7 @@ onMounted(async () => {
   try {
     const postId = route.params['id']
     if (typeof postId !== 'string') return
-    const postInStore = postStore.posts.find((item) => item.id === postId)
+    const postInStore = postStore.posts.data.find((item) => item.id === postId)
     if (postInStore) {
       post.value = postInStore
       return
@@ -27,7 +27,7 @@ onMounted(async () => {
     const docRef = doc(db.blogPosts, postId)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-      post.value = docSnap.data()
+      post.value = { ...docSnap.data(), id: docSnap.id }
     }
   } catch (_error) {
     const error = _error as Error

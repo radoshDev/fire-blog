@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { outlinedArrowForward } from '@quasar/extras/material-icons-outlined'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="hero">
@@ -11,14 +9,20 @@ import { outlinedArrowForward } from '@quasar/extras/material-icons-outlined'
           Weekly blog articles with all things programming including HTML, CSS,
           JavaScript and more. Register today to never miss a posts.
         </p>
-        <RouterLink :to="{ name: 'login' }" class="link">
-          Login/Register <q-icon :name="outlinedArrowForward" />
-        </RouterLink>
+        <q-btn
+          :to="{ name: 'login' }"
+          class="link"
+          flat
+          label="Login/Register"
+          icon-right="arrow_forward"
+        />
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="@/assets/blogPhotos/coding.jpg" alt="Coding view" />
-    </div>
+    <q-img
+      src="@/assets/blogPhotos/coding.jpg"
+      alt="Coding view"
+      class="hero-photo"
+    />
   </div>
 </template>
 
@@ -45,7 +49,7 @@ import { outlinedArrowForward } from '@quasar/extras/material-icons-outlined'
   }
   .hero-photo {
     display: flex;
-    height: 600px;
+    height: 500px;
     flex: 3;
     img {
       height: 100%;

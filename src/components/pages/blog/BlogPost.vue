@@ -20,7 +20,7 @@ const userStore = useUserStore()
       />
     </div>
     <div class="post-picture">
-      <q-img :src="post.coverPhoto" :alt="post.title" height="400px" />
+      <q-img :src="post.coverPhoto" :alt="post.title" height="500px" />
     </div>
   </div>
 </template>
@@ -41,6 +41,9 @@ const userStore = useUserStore()
     }
   }
   &.no-user {
+    .post-content {
+      order: 0;
+    }
     &:nth-child(odd) {
       .post-content {
         @include mobile-min {

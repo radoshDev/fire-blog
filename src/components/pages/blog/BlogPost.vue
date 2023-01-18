@@ -11,7 +11,6 @@ const userStore = useUserStore()
   <div class="post" :class="{ 'no-user': !userStore.isAuth }">
     <div class="post-content">
       <h2 class="title">{{ post.title }}</h2>
-      <p class="post-text">{{ post.textContent }}</p>
     </div>
     <div class="post-picture">
       <img

@@ -4,10 +4,10 @@ import BlogCardsList from '@/components/pages/blog/BlogCardsList.vue'
 import { usePostsStore } from '@/stores/postStore'
 import { onUnmounted } from 'vue'
 
-const store = usePostsStore()
+const postStore = usePostsStore()
 
 onUnmounted(() => {
-  store.isEditPost = false
+  postStore.isEditPost = false
 })
 </script>
 
@@ -17,9 +17,9 @@ onUnmounted(() => {
       <div class="container">
         <div class="toggle-wrapper">
           <span>Toggle Edit Posts</span>
-          <q-toggle v-model="store.isEditPost" />
+          <q-toggle v-model="postStore.isEditPost" />
         </div>
-        <BlogCardsList :post-list="store.postsCard" />
+        <BlogCardsList :post-list="postStore.posts" />
       </div>
     </div>
   </LayoutPage>

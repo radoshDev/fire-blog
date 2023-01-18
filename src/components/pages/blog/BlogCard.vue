@@ -15,7 +15,7 @@ const postStore = usePostsStore()
 <template>
   <q-card class="blog-card">
     <img
-      :src="`/src/assets/blogCards/${post.coverPhoto}.jpg`"
+      :src="`/src/assets/blogPhotos/${post.coverPhoto}.jpg`"
       :alt="post.title"
     />
     <q-card-actions class="card-actions" v-if="postStore.isEditPost">

@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { getSanitizedHtml } from '@/utils/getSanitizedHtml'
 
-import type { BlogPost } from '@/types/Post'
+import type { Post } from '@/types/Post'
 
-const props = defineProps<{ post: BlogPost }>()
+const props = defineProps<{ post: Post }>()
 
 const htmlDescription = computed(() =>
-  getSanitizedHtml(props.post.htmlDescription)
+  getSanitizedHtml(props.post.descriptionHtml)
 )
 </script>
 
@@ -15,8 +15,8 @@ const htmlDescription = computed(() =>
   <div class="blog-post-full q-my-lg">
     <h1 class="text-h2 text-bold q-mb-lg">{{ post.title }}</h1>
     <q-img
-      v-if="post.photoPreviewUrl"
-      :src="post.photoPreviewUrl"
+      v-if="post.coverPhoto"
+      :src="post.coverPhoto"
       height="400px"
       class="main-img"
     >

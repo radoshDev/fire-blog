@@ -9,7 +9,7 @@ export type Post = {
   id: string
 }
 
-export type BlogPost = {
+export type PostFields = {
   htmlDescription: string
   title: string
   photo: File | null

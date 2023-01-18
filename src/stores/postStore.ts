@@ -1,61 +1,74 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { Post, BlogPost } from '@/types/Post'
+import type { Post, PostFields } from '@/types/Post'
 
 export const usePostsStore = defineStore('posts', () => {
-  const postsCard = ref<Post[]>([
+  const posts = reactive<Post[]>([
     {
       title: 'Blog Card #1',
       coverPhoto: 'stock-1',
       date: 'May 1, 2022',
-      id: 1,
-      textContent: 'text content',
+      id: '1',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
     {
       title: 'Blog Card #2',
       coverPhoto: 'stock-2',
       date: 'May 1, 2022',
-      textContent: 'text content',
-      id: 2,
+      id: '2',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
     {
       title: 'Blog Card #3',
       coverPhoto: 'stock-3',
       date: 'May 1, 2022',
-      textContent: 'text content',
-      id: 3,
+      id: '3',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
     {
       title: 'Blog Card #4',
       coverPhoto: 'stock-4',
       date: 'May 1, 2022',
-      textContent: 'text content',
-      id: 3,
+      id: '4',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
   ])
-
-  const blogPosts = ref<Post[]>([
+  const recentPosts = reactive<Post[]>([
     {
-      title: 'This is Filler Title 1',
-      textContent: 'This is a filler blog post content',
-      coverPhoto: 'beautiful-stories',
-      date: '',
-      id: 1,
+      title: 'Blog Card #1',
+      coverPhoto: 'stock-1',
+      date: 'May 1, 2022',
+      id: '1',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
     {
-      title: 'This is Filler Title 2',
-      textContent: 'This is a filler blog post content',
-      coverPhoto: 'designed-for-everyone',
-      date: '',
-      id: 2,
+      title: 'Blog Card #2',
+      coverPhoto: 'stock-2',
+      date: 'May 1, 2022',
+      id: '2',
+      descriptionHtml: 'text content',
+      profileId: '1',
+    },
+    {
+      title: 'Blog Card #3',
+      coverPhoto: 'stock-3',
+      date: 'May 1, 2022',
+      id: '3',
+      descriptionHtml: 'text content',
+      profileId: '1',
     },
   ])
   const isEditPost = ref(false)
-  const blog = ref<BlogPost>({
+  const blog = ref<PostFields>({
     htmlDescription: '',
     title: '',
     photo: null,
     photoPreviewUrl: '',
   })
-  return { postsCard, blogPosts, isEditPost, blog }
+  return { posts, recentPosts, isEditPost, blog }
 })

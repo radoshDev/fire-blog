@@ -6,7 +6,7 @@ const store = usePostsStore()
 
 <template>
   <div class="posts-list">
-    <BlogPost v-for="post in store.blogPosts" :post="post" :key="post.id" />
+    <BlogPost v-for="post in store.posts" :post="post" :key="post.id" />
   </div>
 </template>
 

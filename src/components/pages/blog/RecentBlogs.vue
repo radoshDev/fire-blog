@@ -8,7 +8,7 @@ const store = usePostsStore()
   <div class="cards-wrapper">
     <div class="container">
       <h3 class="title">View more recent blogs</h3>
-      <BlogCardsList :post-list="store.postsCard" />
+      <BlogCardsList :post-list="store.recentPosts" />
     </div>
   </div>
 </template>

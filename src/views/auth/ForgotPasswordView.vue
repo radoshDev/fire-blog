@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ResetPasswordForm from '@/components/forms/ResetPasswordForm.vue'
 import AuthLayout from '@/components/layout/AuthLayout.vue'
-import { RouteName } from '@/router/routes'
+import { RouteName } from '@/utils/constants'
 </script>
 
 <template>

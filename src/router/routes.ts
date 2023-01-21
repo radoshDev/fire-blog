@@ -1,5 +1,11 @@
 import type { ValueOf } from '@/types'
+import type { RouteName } from '@/utils/constants'
 import type { RouteRecordRaw } from 'vue-router'
+import {
+  requiredAuthGuard,
+  adminGuard,
+  requiredNotAuthGuard,
+} from './routesGuards'
 const HomeView = () => import('@/views/HomeView.vue')
 const BlogsView = () => import('@/views/BlogsView.vue')
 const CreatePostView = () => import('@/views/CreatePostView.vue')
@@ -10,20 +16,6 @@ const AdminView = () => import('@/views/AdminView.vue')
 const LoginView = () => import('@/views/auth/LoginView.vue')
 const RegisterView = () => import('@/views/auth/RegisterView.vue')
 const ForgotPasswordView = () => import('@/views/auth/ForgotPasswordView.vue')
-
-export const RouteName = {
-  HOME: 'home',
-  ABOUT: 'about',
-  BLOGS: 'blogs',
-  CREATE_POST: 'create-post',
-  PREVIEW_POST: 'preview-post',
-  VIEW_POST: 'view-post',
-  LOGIN: 'login',
-  REGISTER: 'register',
-  FORGOT_PASSWORD: 'forgot-password',
-  PROFILE: 'profile',
-  ADMIN: 'admin',
-} as const
 
 export type RouteRecord = Omit<RouteRecordRaw, 'name'> & {
   name: ValueOf<typeof RouteName>
@@ -36,7 +28,6 @@ const routes: RouteRecord[] = [
     component: HomeView,
     meta: {
       title: 'Home',
-      requiresAuth: false,
     },
   },
   {
@@ -45,57 +36,55 @@ const routes: RouteRecord[] = [
     component: BlogsView,
     meta: {
       title: 'Blogs',
-      requiresAuth: false,
     },
   },
   {
     path: '/create-post',
     name: 'create-post',
     component: CreatePostView,
+    beforeEnter: adminGuard,
     meta: {
       title: 'Create Post',
-      requiresAuth: true,
     },
   },
   {
     path: '/preview-post',
     name: 'preview-post',
     component: PreviewPostView,
+    beforeEnter: adminGuard,
     meta: {
       title: 'Preview Post',
-      requiresAuth: true,
     },
   },
   {
     path: '/post/:id',
     name: 'view-post',
     component: BlogPostView,
-    beforeEnter: (event) => {
-      event.meta.title = 'New post' + event.params['id']
-    },
+    beforeEnter: requiredAuthGuard,
     meta: {
       title: 'Preview Post',
-      requiresAuth: true,
     },
   },
   {
     path: '/profile',
     name: 'profile',
     component: ProfileView,
+    beforeEnter: requiredAuthGuard,
     meta: { title: 'Profile', requiresAuth: true },
   },
   {
     path: '/admin',
     name: 'admin',
     component: AdminView,
-    meta: { title: 'Admin', requiresAuth: true },
+    beforeEnter: adminGuard,
+    meta: { title: 'Admin' },
   },
   {
     path: '/login',
     name: 'login',
     component: LoginView,
+    beforeEnter: requiredNotAuthGuard,
     meta: {
-      requiresAuth: false,
       title: 'Login',
     },
   },
@@ -103,8 +92,8 @@ const routes: RouteRecord[] = [
     path: '/register',
     name: 'register',
     component: RegisterView,
+    beforeEnter: requiredNotAuthGuard,
     meta: {
-      requiresAuth: false,
       title: 'Registration',
     },
   },
@@ -112,8 +101,8 @@ const routes: RouteRecord[] = [
     path: '/password-recovery',
     name: 'forgot-password',
     component: ForgotPasswordView,
+    beforeEnter: requiredNotAuthGuard,
     meta: {
-      requiresAuth: false,
       title: 'Password Recovery',
     },
   },

@@ -2,10 +2,6 @@ import 'vue-router'
 
 declare module 'vue-router' {
   interface RouteMeta {
-    // is optional
-    isAdmin?: boolean
-    // must be declared by every route
-    requiresAuth: boolean
     title: string
     hideNavbar?: boolean
   }

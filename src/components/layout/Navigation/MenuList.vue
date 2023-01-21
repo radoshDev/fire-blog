@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RouteName } from '@/router/routes'
 import { useUserStore } from '@/stores/userStore'
+import { RouteName } from '@/utils/constants'
 
 const userStore = useUserStore()
 </script>
@@ -10,7 +10,7 @@ const userStore = useUserStore()
     <RouterLink :to="{ name: RouteName.HOME }" class="link">Home</RouterLink>
     <RouterLink :to="{ name: RouteName.BLOGS }" class="link">Blogs</RouterLink>
     <RouterLink
-      v-if="userStore.isAuth"
+      v-if="userStore.profile?.isAdmin"
       :to="{ name: RouteName.CREATE_POST }"
       class="link"
     >

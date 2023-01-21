@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouteName } from '@/router/routes'
-import { useUserStore } from '@/stores/userStore'
-import { signOut } from 'firebase/auth'
-import { auth } from '@/firebase/firebaseInit'
 import { useQuasar } from 'quasar'
+import { signOut } from 'firebase/auth'
+import { RouteName } from '@/utils/constants'
+import { useUserStore } from '@/stores/userStore'
+import { auth } from '@/firebase/firebaseInit'
 
 const $q = useQuasar()
 const userStore = useUserStore()

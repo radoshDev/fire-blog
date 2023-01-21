@@ -1,16 +1,64 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import format from 'date-fns/format'
+import { useRouter } from 'vue-router'
+import { doc, deleteDoc } from 'firebase/firestore'
+import { useQuasar } from 'quasar'
 import { usePostsStore } from '@/stores/postStore'
 import type { Post } from '@/types/Post'
 import { RouteName } from '@/router/routes'
+import { getFormattedDate } from '@/utils/getFormattedDate'
+import db, { auth } from '@/firebase/firebaseInit'
 
 const props = defineProps<{ post: Post }>()
 
+const $q = useQuasar()
+const router = useRouter()
 const postStore = usePostsStore()
-const createdAt = computed(() =>
-  format(props.post.date.toDate(), 'MMM d, yyyy')
-)
+const postedAt = computed(() => getFormattedDate(props.post.date.toDate()))
+
+async function handleDeletePost() {
+  try {
+    $q.loading.show()
+    const tokenResult = await auth.currentUser?.getIdTokenResult()
+    const isAdmin = tokenResult?.claims.admin
+    if (!isAdmin) {
+      $q.notify({
+        message: 'Forbidden! Only administrators can delete posts',
+        color: 'negative',
+        position: 'top',
+      })
+      return
+    }
+    await deleteDoc(doc(db.blogPosts, props.post.id))
+    $q.notify({
+      message: 'Post successfully deleted!',
+      color: 'positive',
+      position: 'top',
+    })
+    postStore.posts.data = postStore.posts.data.filter(
+      (item) => item.id !== props.post.id
+    )
+  } catch (error) {
+    $q.notify({
+      message: 'Something went wrong. Try again later',
+      color: 'negative',
+      position: 'top',
+    })
+  } finally {
+    $q.loading.hide()
+  }
+}
+
+function handleEditPost() {
+  const { coverPhoto, descriptionHtml, title, id } = props.post
+  postStore.blog = {
+    htmlDescription: descriptionHtml,
+    photo: null,
+    photoPreviewUrl: coverPhoto,
+    title,
+  }
+  router.push({ name: RouteName.CREATE_POST, query: { edit: id } })
+}
 </script>
 
 <template>
@@ -23,8 +71,10 @@ const createdAt = computed(() =>
         round
         title="Edit Post"
         style="background: #fff"
+        @click="handleEditPost"
       />
       <q-btn
+        @click="handleDeletePost"
         icon="delete_forever"
         size="sm"
         round
@@ -34,7 +84,7 @@ const createdAt = computed(() =>
     </q-card-actions>
     <q-card-section>
       <div class="text-h4 q-mb-sm">{{ post.title }}</div>
-      <div class="text-body1 text-weight-bold">Posted on: {{ createdAt }}</div>
+      <div class="text-body1 text-weight-bold">Posted on: {{ postedAt }}</div>
     </q-card-section>
     <q-card-actions class="q-px-md">
       <q-btn

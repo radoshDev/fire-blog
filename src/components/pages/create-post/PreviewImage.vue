@@ -13,7 +13,7 @@ const postStore = usePostsStore()
     color="primary"
     no-wrap
     @click="showModal = true"
-    :disable="!postStore.blog.photo"
+    :disable="!postStore.blog.photoPreviewUrl"
   />
   <ModalBasic v-model="showModal" hide-actions>
     <q-img

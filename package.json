@@ -15,7 +15,6 @@
     "@braintree/sanitize-url": "^6.0.2",
     "@quasar/extras": "^1.15.8",
     "@vee-validate/zod": "^4.7.3",
-    "date-fns": "^2.29.3",
     "firebase": "^9.15.0",
     "pinia": "^2.0.28",
     "quasar": "^2.11.1",

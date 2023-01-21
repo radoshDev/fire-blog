@@ -20,6 +20,7 @@ const posts = computed(() => postStore.posts.data.slice(2, 6))
   background-color: rgba(0 0 0/0.1);
   padding: 2.5rem;
   .title {
+    text-align: center;
     font-size: 2.8rem;
     font-weight: 300;
     margin-bottom: 3.2rem;

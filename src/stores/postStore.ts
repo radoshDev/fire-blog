@@ -21,8 +21,6 @@ export const usePostsStore = defineStore('posts', () => {
 
   async function getPosts() {
     try {
-      console.log('Getting posts')
-
       posts.isLoading = true
       posts.error = ''
       const q = query(db.blogPosts, orderBy('date', 'desc'))
@@ -31,13 +29,11 @@ export const usePostsStore = defineStore('posts', () => {
       const newPosts: Post[] = []
 
       queryResult.forEach((item) => {
-        console.log('id:', item)
         if (item.exists()) {
           newPosts.push({ ...item.data(), id: item.id })
         }
       })
       posts.data = newPosts
-      recentPosts.value = newPosts.slice(0, 3)
     } catch (_error) {
       const error = _error as Error
       console.log(error)
@@ -48,5 +44,13 @@ export const usePostsStore = defineStore('posts', () => {
     }
   }
 
-  return { posts, isEditPost, blog, getPosts }
+  function resetBlog() {
+    blog.value = {
+      htmlDescription: '',
+      title: '',
+      photo: null,
+      photoPreviewUrl: '',
+    }
+  }
+  return { posts, isEditPost, blog, getPosts, resetBlog }
 })

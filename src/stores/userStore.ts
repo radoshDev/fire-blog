@@ -27,7 +27,6 @@ export const useUserStore = defineStore('user', () => {
     const tokenResult = await auth.currentUser?.getIdTokenResult()
     const isAdmin = tokenResult?.claims.admin
 
-    console.log('tokenResult', tokenResult?.claims, isAdmin)
     if (!userId) return
 
     const docRef = doc(db.users, userId)
@@ -35,7 +34,6 @@ export const useUserStore = defineStore('user', () => {
 
     const userDBData = userDoc.data()
     if (!userDBData) return
-    console.log(userDBData)
 
     profile.value = {
       ...userDBData,

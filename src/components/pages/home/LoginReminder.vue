@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteName } from '@/router/routes'
+import { RouteName } from '@/utils/constants'
 import { outlinedArrowForward } from '@quasar/extras/material-icons-outlined'
 </script>
 

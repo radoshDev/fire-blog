@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RouteName } from '@/router/routes'
 import { RouterLink } from 'vue-router'
+import { RouteName } from '@/utils/constants'
 import AvatarWithMenu from './AvatarWithMenu.vue'
 import MenuList from './MenuList.vue'
 import MobileMenu from './MobileMenu.vue'

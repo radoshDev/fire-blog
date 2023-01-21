@@ -5,7 +5,7 @@ import { doc, deleteDoc } from 'firebase/firestore'
 import { useQuasar } from 'quasar'
 import { usePostsStore } from '@/stores/postStore'
 import type { Post } from '@/types/Post'
-import { RouteName } from '@/router/routes'
+import { RouteName } from '@/utils/constants'
 import { getFormattedDate } from '@/utils/getFormattedDate'
 import db, { auth } from '@/firebase/firebaseInit'
 

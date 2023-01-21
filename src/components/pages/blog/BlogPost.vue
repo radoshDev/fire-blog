@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteName } from '@/router/routes'
+import { RouteName } from '@/utils/constants'
 import { useUserStore } from '@/stores/userStore'
 import type { Post } from '@/types/Post'
 

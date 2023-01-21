@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LoginForm from '@/components/forms/LoginForm.vue'
 import AuthLayout from '@/components/layout/AuthLayout.vue'
-import { RouteName } from '@/router/routes'
+import { RouteName } from '@/utils/constants'
 </script>
 
 <template>

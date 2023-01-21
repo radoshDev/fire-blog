@@ -14,13 +14,13 @@ let isAuth: boolean
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
 app.use(Quasar, {
   plugins: { Notify, Loading },
 })
 
 onAuthStateChanged(auth, () => {
   if (!isAuth) {
+    app.use(router)
     app.mount('#app')
     isAuth = true
   }

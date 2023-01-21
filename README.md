@@ -1,52 +1,29 @@
-# .
+# Fireblog
 
-This template should help get you started developing with Vue 3 in Vite.
+This is an administrable blog site with WYSIWYG HTML Editor
 
-## Recommended IDE Setup
+## Used technologies
+1. [Vue.js](https://vuejs.org/) for build the application
+2. [Vue router](https://router.vuejs.org/) for routing pages
+3. The UI created using [Quasar](https://quasar.dev/)
+4. Used [Pinia](https://pinia.vuejs.org/) for state management 
+5. [VeeValidate](https://vee-validate.logaretm.com/v4/) for form validation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## How it works
 
-## Type Support for `.vue` Imports in TS
+### There are 3 roles:
+1. Unauthenticated user (has access to the home page and list of recent blogs)
+2. Authenticated user (has access to view and read posts)
+3. Administrator (сan create posts and add other admins)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### Authentication
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- email/password authentication managed through Firebase
+- option to recover the password
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### Administration
+* ability to create new posts
+* ability to edit and delete posts
+* also admin can add new administrator 
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+*To get the admin role, write to me (radosh.dev@gmai.com)

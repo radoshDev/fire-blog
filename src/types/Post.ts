@@ -1,5 +1,5 @@
 import type { Profile } from './User'
-import { Timestamp } from 'firebase/firestore'
+import type { Timestamp } from 'firebase/firestore'
 
 export type Post = {
   title: string

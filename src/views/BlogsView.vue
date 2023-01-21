@@ -2,9 +2,11 @@
 import LayoutPage from '@/components/layout/LayoutPage.vue'
 import BlogCardsList from '@/components/pages/blog/BlogCardsList.vue'
 import { usePostsStore } from '@/stores/postStore'
+import { useUserStore } from '@/stores/userStore'
 import { onUnmounted } from 'vue'
 
 const postStore = usePostsStore()
+const userStore = useUserStore()
 
 onUnmounted(() => {
   postStore.isEditPost = false
@@ -15,7 +17,7 @@ onUnmounted(() => {
   <LayoutPage>
     <div class="blogs">
       <div class="container">
-        <div class="toggle-wrapper">
+        <div class="toggle-wrapper" v-if="userStore.profile?.isAdmin">
           <span>Toggle Edit Posts</span>
           <q-toggle v-model="postStore.isEditPost" />
         </div>

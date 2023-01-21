@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { ref as fRef, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { doc, setDoc, Timestamp } from 'firebase/firestore'
+import { doc, setDoc, Timestamp, updateDoc } from 'firebase/firestore'
 import db, { storage } from '@/firebase/firebaseInit'
 import { usePostsStore } from '@/stores/postStore'
 import ImageBlock from '@/components/pages/create-post/ImageBlock.vue'
@@ -16,10 +16,13 @@ const $q = useQuasar()
 const postStore = usePostsStore()
 const userStore = useUserStore()
 const router = useRouter()
+const { query } = useRoute()
+const postId = query['edit']
 
 async function uploadPost() {
-  const coverPhotoFile = postStore.blog.photo
+  const { photo, photoPreviewUrl } = postStore.blog
   if (!userStore.profile) return
+  if (postId && typeof postId !== 'string') return
   if (!postStore.blog.title) {
     $q.notify({
       color: 'negative',
@@ -28,7 +31,7 @@ async function uploadPost() {
     })
     return
   }
-  if (!coverPhotoFile) {
+  if (!photo && !photoPreviewUrl) {
     $q.notify({
       color: 'negative',
       message: 'Please make sure you uploaded Blog Image',
@@ -46,27 +49,54 @@ async function uploadPost() {
   }
   try {
     $q.loading.show()
-    const storageRef = fRef(
-      storage,
-      `${FireStoragePath.BLOG_COVER_IMAGES}/${coverPhotoFile.name}`
-    )
-    const response = await uploadBytes(storageRef, coverPhotoFile)
-    const imageUrl = await getDownloadURL(response.ref)
-    const blogDoc = doc(db.blogPosts)
+    let imageUrl = photoPreviewUrl
+    if (photo) {
+      const storageRef = fRef(
+        storage,
+        `${FireStoragePath.BLOG_COVER_IMAGES}/${photo.name}`
+      )
+      const response = await uploadBytes(storageRef, photo)
+      imageUrl = await getDownloadURL(response.ref)
+    }
+    const newDoc = doc(db.blogPosts)
     const descriptionHtml = getSanitizedHtml(postStore.blog.htmlDescription)
-    await setDoc(blogDoc, {
-      coverPhoto: imageUrl,
-      date: Timestamp.now(),
-      descriptionHtml,
-      title: postStore.blog.title,
-      profileId: userStore.profile.id,
-    })
+    if (postId) {
+      const blogDoc = doc(db.blogPosts, postId)
+      await updateDoc(blogDoc, {
+        coverPhoto: imageUrl,
+        descriptionHtml,
+        title: postStore.blog.title,
+      })
+      const blogToUpdate = postStore.posts.data.find(
+        (item) => item.id === postId
+      )
+      if (blogToUpdate) {
+        blogToUpdate.coverPhoto = imageUrl
+        blogToUpdate.descriptionHtml = descriptionHtml
+        blogToUpdate.title = postStore.blog.title
+      }
+    } else {
+      const newPost = {
+        coverPhoto: imageUrl,
+        date: Timestamp.now(),
+        descriptionHtml,
+        title: postStore.blog.title,
+        profileId: userStore.profile.id,
+      }
+      await setDoc(newDoc, newPost)
+      postStore.posts.data.unshift({ ...newPost, id: newDoc.id })
+    }
     $q.notify({
       color: 'positive',
-      message: 'Post successfully created!',
+      message: `Post successfully ${postId ? 'updated' : 'created'}!`,
       position: 'top',
     })
-    router.push({ name: RouteName.VIEW_POST, params: { id: blogDoc.id } })
+
+    postStore.resetBlog()
+    router.push({
+      name: RouteName.VIEW_POST,
+      params: { id: postId || newDoc.id },
+    })
   } catch (_error) {
     const error = _error as Error
     $q.notify({
@@ -92,7 +122,12 @@ async function uploadPost() {
     <ImageBlock />
     <PostEditor />
     <div class="actions">
-      <q-btn label="Publish Blog" color="primary" rounded type="submit" />
+      <q-btn
+        :label="postId ? 'Update Blog' : 'Publish Blog'"
+        color="primary"
+        rounded
+        type="submit"
+      />
       <q-btn
         label="Post Preview"
         rounded

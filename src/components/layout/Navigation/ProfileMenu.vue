@@ -11,7 +11,10 @@ const userStore = useUserStore()
 const handleLogout = async () => {
   try {
     await signOut(auth)
+    userStore.profile = null
   } catch (_error) {
+    console.log(_error)
+
     $q.notify({
       message: 'Something went wrong. Try to reload page',
       color: 'negative',
